@@ -16,7 +16,7 @@ class RegisterController extends Controller {
         // Validation
         $this->validate($request, [
             'name'=>['required', 'max:255'],
-            'username'=>['required', 'max:255', 'unique'],
+            'username'=>['required', 'max:255'],
             'email'=>['required', 'email', 'max:255'],
             'password'=>['required', 'confirmed'],
         ]);
@@ -30,6 +30,7 @@ class RegisterController extends Controller {
         ]);
 
         // Sign the user in
+        auth()->attempt($request->only('email', 'password'));
 
         // Redirect
         return redirect()->route('dashboard');

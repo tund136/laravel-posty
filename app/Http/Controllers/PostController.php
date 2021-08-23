@@ -10,7 +10,7 @@ class PostController extends Controller {
 
     public function index() {
         // Eager loading with multiple relationships
-        $posts = Post::with([
+        $posts = Post::latest()->with([
             'user', 'likes'
         ])->paginate(20);
 
@@ -30,6 +30,7 @@ class PostController extends Controller {
     }
 
     public function destroy(Post $post) {
+        $this->authorize('delete', $post);
         $post->delete();
 
         return back();

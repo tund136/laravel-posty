@@ -22,7 +22,9 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'body' => $this->faker->sentence(20),
         ];
+
+        // App\Models\Post::factory()->times(200)->create(['user_id'=>2]);
     }
 }
